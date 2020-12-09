@@ -209,7 +209,7 @@ JDK 설치 -> 이클립스 EE 설치 -> tomcat 서버 설치 및 연동 -> 데�
   
     - Setter 메소드는 스프링 컨테이너가 자동으로 호출. 호출하는 시점은 \<bean\> 객체 생성 직후.
     - Setter 인젝션이 동작하려면 Setter 메소드뿐만 아니라 기본 생성자도 필요.
-    - \<property\> 엘리먼트 사용. name 속성값이 호출하고자 하는 메소드 이름.
+    - **\<property\> 엘리먼트** 사용. name 속성값이 호출하고자 하는 메소드 이름.
     
       ```xml
       <bean id="tv" class="polymorphism.SamsungTV">
@@ -218,4 +218,19 @@ JDK 설치 -> 이클립스 EE 설치 -> tomcat 서버 설치 및 연동 -> 데�
       </bean>
       ```
       
-  - p 네임스페이스 사용하기
+  - **p 네임스페이스** 사용하기 -> 네임스페이스에 대한 별도의 schemaLocation이 없어 더 효율적으로 의존성 주입 처리 가능
+  
+    - `p:변수명-ref="참조할 객체의 이름이나 아이디"` 로 참조형 변수에 참조할 객체 할당 가능
+    - `p:변수명="설정할 값"` 로 기본형이나 문자형 변수에 직접 값 설정
+   
+   
+#### 컬렉션(Collection) 객체 설정
+
+  - 배열이나 List같은 컬렉션 객체에 의존성 주입 시, 관련 엘리먼트를 지원한다.
+    | 컬렉션 유형 | 엘리먼트 |
+    | ---------- | --------- |
+    | java.util.List, 배열 | \<list\> |
+    | java.util.Set | \<set\> |
+    | java.util.Map | \<map\> |
+    | java.util.Properties | \<props\> |
+   
