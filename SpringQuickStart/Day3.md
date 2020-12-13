@@ -32,14 +32,101 @@
   > 리다이렉트 : 요청된 JSP에서 일단 브라우저로 응답 메시지 보냈다가 다시 서버로 재요청하는 방식. <br>
   >     응답이 들어온 파일로 URL이 바뀌지만, 두 번의 요청과 응답으로 처리되어 속도는 포워드보다 느림
   
-  
-#### 글 목록 검색 기능 구현
+<br>
 
-  - getBoardList.jsp 파일을 구현해 사용자가 입력한 검색 관련 정보를 추출.
-  - BoardVO, BoardDAO 객체를 이용해 BOARD 테이블에 저장된 게시글 목록을 검색한다. 결과로 얻은 List<BoardVO> 객체로 게시글 목록 화면 구성
-  - 게시글 제목에 하이퍼링크 설정 가능. **? 추가하고 쿼리 문자열 정보** 넘겨주었음.
-  
-#### 글 상세 기능 구현
+## 3. Model 2 아키텍처로 게시판 개발
 
-  - 사용자가 클릭한 게시글 조회하고 상세 화면 제공하는 getBoard.jsp 파일 작성.
+#### Model 2 아키텍처 구조
+
+  - 시스템의 규모가 크고 기능이 복잡한 엔터프라이즈 시스템 개발하기에는 Model 2가 더 적합
   
+    - 이유 : 자바 로직과 화면 디자인이 통합되어 유지보수가 어려움
+    
+  - Model 2 아키텍쳐 = **MVC 아키텍처**
+  
+    - **Controller**의 등장. Controller는 서블릿 클래스를 중심으로 구현한다.
+    - Model 1에서 JSP가 담당했던 Controller 로직이 별도의 Controller 기능의 서블릿으로 옮겨짐.
+    - => JSP 파일에 있는 자바 코드만 Controller로 옮기면 된다. JSP에는 View 부분만 남고, 자바 개발자는 Controller, Model만 관리하면 됨.
+    
+      | 기능 | 구성 요소 | 개발 주체 |
+      | --- | --- | --- |
+      | Model | VO, DAO 클래스 | 자바 개발자 |
+      | View | JSP 페이지 | 웹 디자이너 |
+      | Controller | Servlet 클래스 | 자바 개발자 또는 MVC 프레임워크 |
+    
+    
+#### Controller 구현하기
+
+  - 서블릿 생성 및 등록. DispatcherServlet 생성.
+  - Controller 서블릿 구현
+  
+    - GET 방식 요청 처리하는 doGet(), POST 방식 요청 처리하는 doPost() 메소드 재정의. 어떤 방식이든 process() 메소드를 통해 클라이언트의 요청을 처리한다.
+    - process()에서는 추출한 path 에 따라 분기 처리 로직이 실행된다.
+    
+    
+<br>
+
+## 4. MVC 프레임워크 개발
+
+#### MVC 프레임워크 구조
+
+  - 위 실습처럼 하나의 서블릿으로 Controller를 구현하면, 클라이언트의 모든 요청을 하나의 서블릿이 처리. -> 개발/유지보수 어려움
+  
+    | 클래스 | 기능 |
+    | --- | --- |
+    | DispatcherServlet | 유일한 서블릿 클래스. 모든 클라이언트의 요청을 가장 먼저 처리하는 Front Controller |
+    | HandlerMapping | 클라이언트의 요청을 처리할 Controller 매핑 |
+    | Controller | 실질적인 클라이언트의 요청 처리 |
+    | ViewResolver | Controller가 리턴한 View 이름으로 실행될 JSP 경로 완성 |
+    
+    
+#### MVC 프레임워크 구현
+
+  1. Controller 인터페이스 작성
+    - 클라이언트 요청을 DispatcherServlet이 처리하는 일은 거의 없으며, 실질적인 요청 처리는 Controller에서.
+    - **모든 Controller들을 같은 타입으로 관리하기 위한 최상위 인터페이스**
+  
+  2. LoginController 구현
+    - 로그인 처리 기능의 마지막은 이동할 화면을 리다이렉트하지 않고 리턴.
+    - handleRequest() 메소드가 확장자 없는 문자열을 리턴하면 자동으로 '.jsp'가 붙어서 처리됨.
+    
+  3. HandlerMapping 클래스 작성
+    - 모든 Controller 객체들을 저장하고 있다가, 클라이언트의 요청이 들어오면 **요청을 처리할 특정 Controller를 검색**해줌.
+    - DispatcherServlet이 사용하는 객체이다.
+    - **Map 타입의 컬렉션**을 멤버변수로 가지고 있으면서 필요한 모든 Controller 객체들을 등록하고 관리.
+    - HashMap에 등록된 정보로 Controller 객체가 어떤 '.do' 요청과 매핑되는지 확인.
+    
+  4. ViewResolver 클래스 작성
+    - Controller가 리턴한 View 이름에 접두사/접미사 결합해서 최종적으로 실행될 View 경로와 파일명 완성.
+    
+  5. DispatcherServlet 수정
+    - init() 메소드 재정의. DispatcherServlet이 사용할 HandlerMapping과 ViewResolver 객체를 초기화.
+    - 클라이언트의 요청 path에 해당하는 Controller를 검색하기 위해 **HandlerMapping 객체의 getController() 호출**
+    - 검색된 Controller의 **handleRequest() 호출하여 요청에 해당하는 로직 처리**하고, **이동할 화면 정보를 리턴**
+    - 리턴받은 view 이름을 이용해 해당 화면으로 이동
+    
+    
+#### MVC 프레임워크 적용
+
+  (실습)
+  
+#### EL/JSTL 이용한 JSP 화면 처리
+
+  - JSP 파일에서 완전히 자바 코드를 제거하고 싶다면, JSP에 제공하는 EL과 JSTL을 이용
+  
+    > **EL(Expression Language)**
+    > 
+    > 기존의 표현식을 대체하는 표현 언어.<br>
+    > <%= session.getAttribute("userName") %> -> ${userName}
+
+
+    > **JSTL(JSP Standard Tag Library)**
+    > 
+    > JSP에서 사용해야 하는 if, for, switch 등의 자바 코드들을 태그 형태로 사용하도록 지원<br>
+  
+ 
+ 
+<br>
+
+## 5. Spring MVC 구조
+
