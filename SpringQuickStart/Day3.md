@@ -82,28 +82,28 @@
     
 #### MVC 프레임워크 구현
 
-  1. Controller 인터페이스 작성
-    - 클라이언트 요청을 DispatcherServlet이 처리하는 일은 거의 없으며, 실질적인 요청 처리는 Controller에서.
-    - **모든 Controller들을 같은 타입으로 관리하기 위한 최상위 인터페이스**
+  1. Controller 인터페이스 작성<br>
+    - 클라이언트 요청을 DispatcherServlet이 처리하는 일은 거의 없으며, 실질적인 요청 처리는 Controller에서.<br>
+    - **모든 Controller들을 같은 타입으로 관리하기 위한 최상위 인터페이스**<br>
   
-  2. LoginController 구현
-    - 로그인 처리 기능의 마지막은 이동할 화면을 리다이렉트하지 않고 리턴.
-    - handleRequest() 메소드가 확장자 없는 문자열을 리턴하면 자동으로 '.jsp'가 붙어서 처리됨.
+  2. LoginController 구현<br>
+    - 로그인 처리 기능의 마지막은 이동할 화면을 리다이렉트하지 않고 리턴.<br>
+    - handleRequest() 메소드가 확장자 없는 문자열을 리턴하면 자동으로 '.jsp'가 붙어서 처리됨.<br>
     
-  3. HandlerMapping 클래스 작성
-    - 모든 Controller 객체들을 저장하고 있다가, 클라이언트의 요청이 들어오면 **요청을 처리할 특정 Controller를 검색**해줌.
-    - DispatcherServlet이 사용하는 객체이다.
-    - **Map 타입의 컬렉션**을 멤버변수로 가지고 있으면서 필요한 모든 Controller 객체들을 등록하고 관리.
-    - HashMap에 등록된 정보로 Controller 객체가 어떤 '.do' 요청과 매핑되는지 확인.
+  3. HandlerMapping 클래스 작성<br>
+    - 모든 Controller 객체들을 저장하고 있다가, 클라이언트의 요청이 들어오면 **요청을 처리할 특정 Controller를 검색**해줌.<br>
+    - DispatcherServlet이 사용하는 객체이다.<br>
+    - **Map 타입의 컬렉션**을 멤버변수로 가지고 있으면서 필요한 모든 Controller 객체들을 등록하고 관리.<br>
+    - HashMap에 등록된 정보로 Controller 객체가 어떤 '.do' 요청과 매핑되는지 확인.<br>
     
-  4. ViewResolver 클래스 작성
-    - Controller가 리턴한 View 이름에 접두사/접미사 결합해서 최종적으로 실행될 View 경로와 파일명 완성.
+  4. ViewResolver 클래스 작성<br>
+    - Controller가 리턴한 View 이름에 접두사/접미사 결합해서 최종적으로 실행될 View 경로와 파일명 완성.<br>
     
-  5. DispatcherServlet 수정
-    - init() 메소드 재정의. DispatcherServlet이 사용할 HandlerMapping과 ViewResolver 객체를 초기화.
-    - 클라이언트의 요청 path에 해당하는 Controller를 검색하기 위해 **HandlerMapping 객체의 getController() 호출**
-    - 검색된 Controller의 **handleRequest() 호출하여 요청에 해당하는 로직 처리**하고, **이동할 화면 정보를 리턴**
-    - 리턴받은 view 이름을 이용해 해당 화면으로 이동
+  5. DispatcherServlet 수정<br>
+    - init() 메소드 재정의. DispatcherServlet이 사용할 HandlerMapping과 ViewResolver 객체를 초기화.<br>
+    - 클라이언트의 요청 path에 해당하는 Controller를 검색하기 위해 **HandlerMapping 객체의 getController() 호출**<br>
+    - 검색된 Controller의 **handleRequest() 호출하여 요청에 해당하는 로직 처리**하고, **이동할 화면 정보를 리턴**<br>
+    - 리턴받은 view 이름을 이용해 해당 화면으로 이동<br>
     
     
 #### MVC 프레임워크 적용
