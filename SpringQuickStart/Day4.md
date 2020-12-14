@@ -161,7 +161,9 @@
     - 사용자가 ".do" 요청을 서버에 전달하면, 서블릿 컨테이너는 DispatcherServlet 객체 생성
     - DispatcherServlet은 presentation-layer.xml 로딩하여 두 번째 스프링 컨테이너 구동
     - 두 번째 스프링 컨테이너가 Controller 객체를 메모리에 생성
+    
     <br>
+    
     - ContextLoaderListener, DispatcherServlet이 각각 XmlWebApplicationContext 생성 -> 역할/기능이 다름
     
       - ContextLoaderListener가 생성하는 **Root 컨테이너(부모)**.
@@ -169,3 +171,43 @@
       - 부모가 생성한 비즈니스 객체를 자식이 생성한 Controller에서 참조 가능
       
       
+<br>
+
+## 4. 검색 기능 추가 구현
+
+  (실습)
+  
+<br>
+
+## 5. 파일 업로드
+
+#### 파일 업로드 처리
+
+  - CommonsMultipartResolver 클래스는 id, name 등이 정해져있다. (Resolver 로 끝나는 클래스들은 더 신경 써야함)
+  - **setUploadFile()** 메소드가 호출되려면 **MultipartFile** 객체가 스프링 컨테이너에 의해 먼저 생성되어 있어야 한다.
+  - MultipartFile 객체
+  
+    - 클라이언트가 업로드한 파일에 대한 모든 정보가 저장된다.
+    - 이 객체만 가지고 있으면 원하는 위치에 해당 파일 업로드 가능
+    - MultipartFile 인터페이스가 제공하는 주요 메소드
+    
+      | 메소드 | 설명 |
+      | --- | --- |
+      | String getOriginalFilename() | 업로드한 파일명을 문자열로 리턴 |
+      | void transferTo(File destFile) | 업로드한 파일을 destFile에 저장 |
+      | boolean isEmpty() | 업로드한 파일 존재 여부 리턴(없으면 true 리턴) |
+      
+      
+#### 예외 처리
+
+  - 어노테이션 기반의 예외 처리
+  
+    - @ControllerAdvice 와 @ExceptionHandler 사용.
+    
+  - XML 기반의 예외 처리
+  
+    - CommonExceptionHandler처럼 예외 처리 클래스를 별도 구현하지 않아도 돼서 좀더 쉬운 방법. xml 설정만 처리하면 됨.
+    
+<br>
+
+## 6. 다국어 처리
