@@ -130,3 +130,26 @@
 
 ## 5. Spring MVC 구조
 
+#### Spring MVC 수행 흐름(실습)
+
+  1. 클라이언트로부터의 모든 ".do" 요청을 DispatcherServlet이 받는다.
+  2. DispatcherServlet은 HandlerMapping을 통해 요청을 처리할 Controller를 검색한다.
+  3. DispatcherServlet은 검색된 Controller를 실행하여 클라이언트의 요청을 처리한다.
+  4. Controller는 비즈니스 로직의 수행 결과로 얻어낸 Model 정보와 Model을 보여줄 View 정보를 ModelAndView 객체에 저장하여 리턴한다.
+  5. DispatcherServlet은 ModelAndView로부터 View 정보를 추출하고, ViewResolver를 이용하여 응답으로 사용할 View를 얻어낸다.
+  6. DispatcherServlet은 ViewResolver를 통해 찾아낸 View를 실행하여 응답을 전송한다.
+  
+#### DispatcherServlet 등록 및 스프링 컨테이너 구동
+
+  - 실습에서 생성했던 DispatcherServlet 클래스를 스프링 프레임워크에서 제공하는 DispatcherServlet으로 변경
+  - 클라이언트의 요청으로 DispatcherServlet 객체가 생성되고 나면 init()이 자동 실행되어 XmlWebApplicationContext라는 스프링 컨테이너가 구동된다.
+  - **HandlerMapping, Controller, ViewResolver 객체들을 메모리에 생성하기 위해 DispatcherServlet은 스프링 컨테이너를 구동**.
+
+
+<br>
+
+## 6-7. Spring MVC 적용
+
+  (실습)
+  
+  
