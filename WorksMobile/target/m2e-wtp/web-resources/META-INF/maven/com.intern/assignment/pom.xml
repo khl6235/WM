@@ -62,6 +62,14 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
+			<version>5.1.38</version>
+		</dependency>
+		
+		<!-- Ibatis -->
+		<dependency>
+			<groupId>org.apache.ibatis</groupId>
+			<artifactId>ibatis-core</artifactId>
+			<version>3.0</version>
 		</dependency>
 				
 		<!-- AspectJ -->
