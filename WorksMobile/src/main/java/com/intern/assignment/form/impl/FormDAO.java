@@ -4,16 +4,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
 import com.intern.assignment.form.FormVO;
+import com.intern.assignment.util.SqlSessionFactoryBean;
 
-@Repository
 public class FormDAO{
 	
+	private SqlSession mybatis;
+	
+	public FormDAO() {
+		mybatis = SqlSessionFactoryBean.getSqlSessionInstance();
+	}
+	
+	public void insertForm(FormVO vo) {
+		mybatis.insert("FormDAO.insertForm", vo);
+		mybatis.commit();
+	}
+	
+	public void updateForm(FormVO vo) {
+		mybatis.update("FormDAO.updateForm", vo);
+		mybatis.commit();
+	}
+	
+	public void deleteForm(FormVO vo) {
+		mybatis.delete("FormDAO.deleteForm", vo);
+		mybatis.commit();
+	}
+	
+	public FormVO getForm(FormVO vo) {
+		return (FormVO) mybatis.selectOne("FormDAO.getForm", vo);
+	}
+	
+	public List<FormVO> getFormList(FormVO vo){
+		return mybatis.selectList("FormDAO.getFormList", vo);
+	}
+	
+	
+	/*
+	 * 
+	 * 
 	//sql
 	private final String FORM_INSERT = "insert into form(userIdx, title) values(?, ?)";
 	private final String FORM_UPDATE = "update form set userIdx=?, title=? where formIdx=?";
@@ -60,8 +93,13 @@ public class FormDAO{
 		return jdbcTemplate.query(FORM_GET_LIST, new FormRowMapper());		
 	}
 	
+	
+	*/
+	
 }
 
+
+/*
 class FormRowMapper implements RowMapper<FormVO>{
 	public FormVO mapRow(ResultSet rs, int rowNum) throws SQLException{
 		FormVO form = new FormVO();
@@ -73,3 +111,5 @@ class FormRowMapper implements RowMapper<FormVO>{
 		return form;
 	}
 }
+
+*/

@@ -53,10 +53,11 @@ public class HomeController {
         try {
             conn = dataSource.getConnection();
             stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select now() as now;");
+//            ResultSet rs = stmt.executeQuery("select now() as now;");
+            ResultSet rs = stmt.executeQuery("select * from form;");
             
             while(rs.next()) {
-                model.addAttribute("serverTime", rs.getString("now"));
+                model.addAttribute("serverTime", rs.getString("title"));
             }
             
         } catch (Exception e) {

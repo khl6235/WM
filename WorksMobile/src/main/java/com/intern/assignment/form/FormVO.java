@@ -1,6 +1,6 @@
 package com.intern.assignment.form;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class FormVO {
 	
