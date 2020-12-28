@@ -2,13 +2,13 @@ package com.intern.assignment.util;
 
 import java.io.Reader;
 
-//import org.apache.ibatis.io.Resources;
-//import org.apache.ibatis.session.SqlSession;
-//import org.apache.ibatis.session.SqlSessionFactory;
-//import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class SqlSessionFactoryBean {
-	/*
+
 	private static SqlSessionFactory sessionFactory = null;
 	
 	static {
@@ -25,6 +25,6 @@ public class SqlSessionFactoryBean {
 	public static SqlSession getSqlSessionInstance() {
 		return sessionFactory.openSession();
 	}
-	*/
+
 
 }

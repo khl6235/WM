@@ -1,24 +1,23 @@
 package com.intern.assignment.form.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.intern.assignment.form.FormVO;
 import com.intern.assignment.util.SqlSessionFactoryBean;
 
+@Repository
 public class FormDAO{
 	
+	@Autowired
 	private SqlSession mybatis;
 	
-	public FormDAO() {
+//	public FormDAO() {
 //		mybatis = SqlSessionFactoryBean.getSqlSessionInstance();
-	}
+//	}
 	
 	public void insertForm(FormVO vo) {
 		mybatis.insert("FormDAO.insertForm", vo);
