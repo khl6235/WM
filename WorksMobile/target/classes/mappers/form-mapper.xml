@@ -2,25 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="FormDAO">
- 
- 	<insert id="insertForm">
- 		insert into form(userIdx, title) values(#{userIdx}, #{title})
- 	</insert>
+    <!-- FormDAO -->
+    <insert id="insertForm" parameterType="form">
+    <![CDATA[
+    	INSERT INFO form(userIdx, title) VALUES(#{userIdx}, #{title})
+    ]]>
+     </insert>
  	
- 	<update id="updateForm">
- 		update form set userIdx=#{userIdx}, title=#{title} where formIdx=#{formIdx}
- 	</update>
+     <update id="updateForm">
+     <![CDATA[
+     	UPDATE form SET userIdx=#{userIdx}, title=#{title} WHERE formIdx=#{formIdx}
+     ]]>
+     </update>
  	
- 	<delete id="deleteForm">
- 		delete form where formIdx=#{formIdx}
- 	</delete>
+     <delete id="deleteForm">
+     <![CDATA[
+      	DELETE form WHERE formIdx=#{formIdx}
+     ]]>
+     </delete>
  	
     <select id="getForm" resultType="form">
-        select * from form where formIdx=#{formIdx}
+    <![CDATA[
+    	SELECT * FROM form WHERE formIdx=#{formIdx}
+    ]]>
     </select>
     
     <select id="getFormList" resultType="form">
-    	select * from form order by formIdx desc
+    <![CDATA[
+    	SELECT * FROM form ORDER BY formIdx DESC
+    ]]>
     </select>
     
 </mapper>

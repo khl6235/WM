@@ -17,7 +17,7 @@ public class FormDAO{
 	private SqlSession mybatis;
 	
 	public FormDAO() {
-		mybatis = SqlSessionFactoryBean.getSqlSessionInstance();
+//		mybatis = SqlSessionFactoryBean.getSqlSessionInstance();
 	}
 	
 	public void insertForm(FormVO vo) {
