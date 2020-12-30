@@ -7,17 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.intern.assignment.form.FormVO;
-import com.intern.assignment.util.SqlSessionFactoryBean;
 
 @Repository
 public class FormDAO{
 	
 	@Autowired
 	private SqlSession mybatis;
-	
-//	public FormDAO() {
-//		mybatis = SqlSessionFactoryBean.getSqlSessionInstance();
-//	}
 	
 	public void insertForm(FormVO vo) {
 		mybatis.insert("FormDAO.insertForm", vo);

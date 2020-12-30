@@ -1,35 +1,37 @@
 package com.intern.assignment.user.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.intern.assignment.common.JDBCUtil;
 import com.intern.assignment.user.UserVO;
 
 @Repository
 public class UserDAO {
-	private Connection conn = null;
-	private PreparedStatement stmt = null;
-	private ResultSet rs = null;
+	
+	@Autowired
+	private SqlSession mybatis;
+	
+	public UserVO getUser(UserVO vo) {
+		return (UserVO) mybatis.selectOne("UserDAO.getUser", vo);
+	}
+	
+//	private Connection conn = null;
+//	private PreparedStatement stmt = null;
+//	private ResultSet rs = null;
 	
 	//sql
-	private final String USER_GET = "select * from user where id=? and password=?";
+//	private final String USER_GET = "select * from user where id=? and password=?";
 	
 //	@Autowired
 //	private JdbcTemplate jdbcTemplate;
 	
 	//methods
 	//enroll user
-	public UserVO getUser(UserVO vo) {
-		UserVO user = null;
+//	public UserVO getUser(UserVO vo) {
+//		UserVO user = null;
 //		Object[] args = {vo.getId(), vo.getPassword()};
+	/*
 		try {
 			System.out.println("===> JDBC getUser()!");
 			conn = JDBCUtil.getConnection();
@@ -52,9 +54,9 @@ public class UserDAO {
 		return user;
 		
 	}
-
+*/
 }
-
+/*
 class UserRowMapper implements RowMapper<UserVO>{
 	public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException{
 		UserVO user = new UserVO();
@@ -65,3 +67,4 @@ class UserRowMapper implements RowMapper<UserVO>{
 		return user;
 	}
 }
+*/

@@ -6,6 +6,7 @@
 	<!-- Alias -->
 	<typeAliases>
 		<typeAlias alias="form" type="com.intern.assignment.form.FormVO"/>
+		<typeAlias alias="user" type="com.intern.assignment.user.UserVO"/>
 	</typeAliases>
 	
 	
@@ -26,6 +27,7 @@
 	<!-- Sql Mapper -->
 	<mappers>
 		<mapper resource="mappers/form-mapper.xml"/>
+		<mapper resource="mappers/user-mapper.xml"/>
 	</mappers>
 
 </configuration>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.intern.assignment.form.FormService;
 import com.intern.assignment.form.FormVO;
 
-@Service
+@Service("formService")
 public class FormServiceImpl implements FormService{
 	@Autowired
 	private FormDAO formDAO;

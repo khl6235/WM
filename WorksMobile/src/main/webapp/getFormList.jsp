@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.intern.assignment.form.impl.FormDAO" %>
-<%@ page import="com.intern.assignment.form.FormVO" %>
+<%@ taglib uri= "http://java.sun.com/jstl/core_rt" prefix="c" %>
 
-<%
-FormVO vo = new FormVO();
-FormDAO formDAO = new FormDAO();
-List<FormVO> formList = formDAO.getFormList(vo);
-
-%>
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,7 +12,7 @@ List<FormVO> formList = formDAO.getFormList(vo);
 <center>
 
 <h1>설문 목록</h1>
-<h3>테스트님 환영합니다...<a href="logout_proc.jsp">Log-out</a></h3>
+<h3>${userName }님 환영합니다...<a href="logout.do">Log-out</a></h3>
 
 
 <table border="1" cellpadding="0" cellspacing="0" width="700">
@@ -32,14 +23,14 @@ List<FormVO> formList = formDAO.getFormList(vo);
 	<th bgcolor="orange" width="200">등록 시간</th>
 </tr>
 
-<% for(FormVO form : formList){ %>
+<c:forEach items="${formList }" var="form">
 <tr>
-	<td><%= form.getFormIdx() %></td>
-	<td align="left"><a href="getForm.jsp?formIdx=<%= form.getFormIdx() %>"><%= form.getTitle() %></a></td>
-	<td><%= form.getUserIdx() %></td>
-	<td><%= form.getCreatedAt() %></td>
+	<td>${form.formIdx }</td>
+	<td align="left"><a href="getForm.do?formIdx=${form.formIdx }">${form.title }</a></td>
+	<td>${form.userIdx }</td>
+	<td>${form.createdAt }</td>
 </tr>
-<% } %>
+</c:forEach>
 </table>
 <br>
 <a href="insertForm.jsp">새 설문 등록</a>
