@@ -8,6 +8,8 @@
 		<typeAlias alias="form" type="com.intern.assignment.form.FormVO"/>
 		<typeAlias alias="user" type="com.intern.assignment.user.UserVO"/>
 		<typeAlias alias="content" type="com.intern.assignment.content.ContentVO"/>
+		<typeAlias alias="objective" type="com.intern.assignment.content.ObjectiveVO"/>
+		<typeAlias type="com.intern.assignment.content.SubjectiveVO"/>
 	</typeAliases>
 	
  	
@@ -16,6 +18,8 @@
 		<mapper resource="mappers/form-mapper.xml"/>
 		<mapper resource="mappers/user-mapper.xml"/>
 		<mapper resource="mappers/content-mapper.xml"/>
+		<mapper resource="mappers/objective-mapper.xml"/>
+		<mapper resource="mappers/subjective-mapper.xml"/>
 	</mappers>
 
 </configuration>

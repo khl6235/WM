@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SubjectiveDAO">
+
+	<insert id="insertSubjective" parameterType="subjective">
+    <![CDATA[
+    	INSERT INFO content(question, description, type) VALUES(#{question}, #{description}, #{type})
+    ]]>
+    </insert>
+ 	
+     <update id="updateSubjective">
+     <![CDATA[
+     	UPDATE content SET question=#{question}, description=#{description} WHERE contentIdx=#{contentIdx}
+     ]]>
+     </update>
+ 	 
+     <delete id="deleteSubjective">
+     <![CDATA[
+      	DELETE content WHERE contentIdx=#{contentIdx}
+     ]]>
+     </delete>
+     
+     <!-- 
+     <select id="getContent" resultType="content">
+    <![CDATA[
+    	SELECT * FROM content WHERE contentIdx=#{contentIdx}
+    ]]>
+    </select>
+     
+    <select id="getContentList" resultType="content">
+    <![CDATA[
+    	SELECT content.contentIdx, question, description, type
+    	FROM content JOIN form_content 
+    	WHERE content.contentIdx=form_content.contentIdx 
+    			AND form_content.formIdx = #{formIdx}
+    ]]>
+    </select>
+    -->
+    
+</mapper>
