@@ -2,7 +2,6 @@ package com.intern.assignment.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +16,6 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-    BasicDataSource dataSource;
-	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String loginView(UserVO vo) {
 		
@@ -30,6 +26,7 @@ public class LoginController {
 		
 		return "login.jsp";
 	}
+	
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login(UserVO vo, HttpSession session) {
@@ -46,6 +43,21 @@ public class LoginController {
 			System.out.println("아이디와 비밀번호를 다시 확인하십시오.");
 			return "login.jsp";
 		}
+	}
+	
+	@RequestMapping(value="/signup.do", method=RequestMethod.POST)
+	public String signUp(UserVO vo) {
+		System.out.println("회원가입 처리...");
+		
+		userService.signUp(vo);
+		return "login.jsp";
+	}
+	
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		return "login.jsp";
 	}
 
 }

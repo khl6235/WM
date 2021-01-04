@@ -3,10 +3,11 @@ package com.intern.assignment.content.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.intern.assignment.content.ObjectiveService;
 import com.intern.assignment.content.ObjectiveVO;
 
 @Service("objectiveService")
-public class ObjectiveServiceImpl {
+public class ObjectiveServiceImpl implements ObjectiveService{
 	
 	@Autowired
 	private ObjectiveDAO objectiveDAO;

@@ -16,17 +16,17 @@ public class FormDAO{
 	
 	public void insertForm(FormVO vo) {
 		mybatis.insert("FormDAO.insertForm", vo);
-		mybatis.commit();
+//		mybatis.commit();
 	}
 	
 	public void updateForm(FormVO vo) {
 		mybatis.update("FormDAO.updateForm", vo);
-		mybatis.commit();
+//		mybatis.commit();
 	}
 	
 	public void deleteForm(FormVO vo) {
 		mybatis.delete("FormDAO.deleteForm", vo);
-		mybatis.commit();
+//		mybatis.commit();
 	}
 	
 	public FormVO getForm(FormVO vo) {

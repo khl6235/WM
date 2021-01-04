@@ -5,6 +5,7 @@ public class UserVO {
 	private int userIdx;
 	private String id;
 	private String password;
+	private String passwordCheck;
 	
 	
 	public int getUserIdx() {
@@ -25,7 +26,13 @@ public class UserVO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	public String getPasswordCheck() {
+		return passwordCheck;
+	}
+	public void setPasswordCheck(String passwordCheck) {
+		this.passwordCheck = passwordCheck;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserVO [userIdx = "+userIdx+", id = "+id+", password = "+password+"]";

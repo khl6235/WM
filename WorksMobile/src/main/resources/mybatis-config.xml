@@ -9,7 +9,7 @@
 		<typeAlias alias="user" type="com.intern.assignment.user.UserVO"/>
 		<typeAlias alias="content" type="com.intern.assignment.content.ContentVO"/>
 		<typeAlias alias="objective" type="com.intern.assignment.content.ObjectiveVO"/>
-		<typeAlias type="com.intern.assignment.content.SubjectiveVO"/>
+		<typeAlias alias="subjective" type="com.intern.assignment.content.SubjectiveVO"/>
 	</typeAliases>
 	
  	

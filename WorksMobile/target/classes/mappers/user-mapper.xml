@@ -8,5 +8,11 @@
 			SELECT * FROM user WHERE id=#{id} AND password=#{password}
 		]]>
 	</select>
+	
+	<insert id="signUp" parameterType="user">
+		<![CDATA[
+			INSERT INTO user(id, password) VALUES(#{id}, #{password})
+		]]>
+	</insert>
 
 </mapper>
