@@ -1,13 +1,17 @@
 package com.intern.assignment.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.intern.assignment.form.FormService;
 import com.intern.assignment.form.FormVO;
 
+@CrossOrigin
 @Controller
 public class FormController {
 
@@ -39,9 +43,10 @@ public class FormController {
 	}
 	
 	@RequestMapping("/getFormList.do")
-	public String getFormList(FormVO vo, Model model) {
+	public List<FormVO> getFormList(FormVO vo, Model model) {
 		model.addAttribute("formList", formService.getFormList(vo));
-		return "getFormList.jsp";
+		System.out.println(formService.getFormList(vo));
+		return formService.getFormList(vo);
 	}
 	
 }

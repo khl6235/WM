@@ -12,7 +12,7 @@
 	<h1>설문 프로그램</h1>
 	<hr>
 		<a href="login.do">로그인</a><br><br><br>
-		<a href="getFormList.do">설문 목록 바로가기</a>
+		<a href="form/getFormList.do">설문 목록 바로가기</a>
 	<hr>
 
 </center>
