@@ -44,14 +44,11 @@ public class FormController {
 		return "getForm.jsp";
 	}
 	
-//	@RequestMapping(value="/getFormList.do", method= {RequestMethod.GET, RequestMethod.POST})
 	@RequestMapping(value="/forms", method = RequestMethod.GET)
-//	public List<FormVO> getFormList(FormVO vo, Model model) {
-	public String getFormList(FormVO vo) {
+	public List<FormVO> getFormList(FormVO vo, Model model) {
 //		model.addAttribute("formList", formService.getFormList(vo));
 		System.out.println(formService.getFormList(vo));
-//		return formService.getFormList(vo);
-		return "";
+		return formService.getFormList(vo);
 	}
 	
 }
