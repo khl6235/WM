@@ -7,12 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.intern.assignment.form.FormService;
 import com.intern.assignment.form.FormVO;
 
-@CrossOrigin
+@CrossOrigin(origins="*")
 @Controller
+//@RequestMapping("forms")
 public class FormController {
 
 	@Autowired
@@ -29,7 +31,7 @@ public class FormController {
 		formService.updateForm(vo);
 		return "getFormList.do";
 	}
-	
+	 
 	@RequestMapping("/deleteForm.do")
 	public String deleteForm(FormVO vo) {
 		formService.deleteForm(vo);
@@ -42,11 +44,14 @@ public class FormController {
 		return "getForm.jsp";
 	}
 	
-	@RequestMapping("/getFormList.do")
-	public List<FormVO> getFormList(FormVO vo, Model model) {
-		model.addAttribute("formList", formService.getFormList(vo));
+//	@RequestMapping(value="/getFormList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/forms", method = RequestMethod.GET)
+//	public List<FormVO> getFormList(FormVO vo, Model model) {
+	public String getFormList(FormVO vo) {
+//		model.addAttribute("formList", formService.getFormList(vo));
 		System.out.println(formService.getFormList(vo));
-		return formService.getFormList(vo);
+//		return formService.getFormList(vo);
+		return "";
 	}
 	
 }
